@@ -9,12 +9,9 @@
 <!-- VERSIONS_START -->
 
 ![License](https://img.shields.io/badge/license-MIT-black?style=flat-square&logo=opensourceinitiative&logoColor=white)
-![zigduck](https://img.shields.io/badge/🦆%20zigduck-0.2.4-black?style=flat)
+![zigduck](https://img.shields.io/badge/🦆%20zigduck-0.2.6-black?style=flat)
 ![CI](https://github.com/quackhack-mcblindy/zigduck/actions/workflows/ci.yml/badge.svg)
 
-![Mosquitto](https://img.shields.io/badge/Mosquitto-2.1.2-yellow?style=flat-square&logo=eclipsemosquitto&logoColor=white)
-![Zigbee2MQTT](https://img.shields.io/badge/Zigbee2MQTT-2.14.1-yellow?style=flat-square&logo=zigbee2mqtt&logoColor=white)
-![ADB](https://img.shields.io/badge/ADB-1.0.41-green?style=flat-square&logo=android&logoColor=white)
 
 <!-- VERSIONS_END -->
 
@@ -27,8 +24,7 @@
 Control your entire smart home with this handy Zigduck widget in the top bar.<br>
 **Zigduck** is a complete home automation system for NixOS.<br>
 Using this extension you can see and control Zigbee & Philips Hue (+Sync Box) devices, Android TVs, fetch, build and display EPG/TV-Guide, copy current lights state and create a Nix expression & copy it straight to clipboard.<br>
-Extension uses clipboard only for copying that. There are no extension settings, all configuration comes from your Nix code.<br>
-Create custom (non-zigbee) devices for monitoring and controlling and wire your own automations.<br>
+Extension uses clipboard only for copying that. There are no extension settings, all configuration comes from your Nix code. Create custom (non-zigbee) devices for monitoring and controlling and wire your own automations.<br>
 This extension also provides a chat interface and users may write their own natural language commands (no LLM).<br>
 
 **Define once, deploy forever.**
