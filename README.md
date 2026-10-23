@@ -6,15 +6,6 @@
 
 ![Zigduck demo](Screenshots/zigduck-slider.gif)
 
-<!-- VERSIONS_START -->
-
-![License](https://img.shields.io/badge/license-MIT-black?style=flat-square&logo=opensourceinitiative&logoColor=white)
-![zigduck](https://img.shields.io/badge/🦆%20zigduck-0.2.6-black?style=flat)
-![CI](https://github.com/quackhack-mcblindy/zigduck/actions/workflows/ci.yml/badge.svg)
-
-
-<!-- VERSIONS_END -->
-
 
 
 # **zigduck-gnome-shell-extension**
@@ -60,7 +51,15 @@ Lights, dimmers, motion sensors - it should all work as expected **out of the bo
 
 https://extensions.gnome.org/extension/11365/zigduck-smart-home/
 
+
+```bash
+git clone https://github.com/QuackHack-McBlindy/zigduck-gnome-shell-extension.git
+cd zigduck-gnome-shell-extension
+bash install.sh
+```
+
 <br>
+
 
 ## **License**
 

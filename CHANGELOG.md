@@ -16,6 +16,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 
+## [0.2.0] - 2026-10-22
+
+### Added
+
+- Now supports `house.devices` where users may create virtual devices with actions.
+
+### Changed
+
+### Fixed
+
+### Removed
+
+
 ## [0.1.0] - 2026-10-18
 
 
