@@ -1,4 +1,5 @@
 import St     from 'gi://St';
+import Clutter from 'gi://Clutter';
 import Pango  from 'gi://Pango';
 
 import { RED } from '../constants.js';
@@ -7,7 +8,8 @@ import { formatNotifyTime } from '../utils.js';
 
 export function renderNotifyView(indicator) {
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 6px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 6px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
@@ -54,7 +56,8 @@ export function renderNotifyView(indicator) {
 
     for (const n of list) {
         const row = new St.BoxLayout({
-            vertical: true, x_expand: true,
+            orientation: Clutter.Orientation.VERTICAL,
+            x_expand: true,
             style: 'spacing: 4px; padding: 8px 10px; '
                  + 'border-radius: 6px; '
                  + 'background-color: rgba(255,255,255,0.04); '

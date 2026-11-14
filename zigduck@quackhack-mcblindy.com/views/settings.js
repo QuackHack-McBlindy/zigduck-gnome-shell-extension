@@ -6,7 +6,8 @@ import { zigduckIcon, mdiIcon, plainLabel } from '../icons.js';
 
 export function renderSettingsView(indicator) {
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 6px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 6px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });

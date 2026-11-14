@@ -8,7 +8,8 @@ import { sparkline } from '../widgets.js';
 
 export function renderCardsSection(indicator) {
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 6px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 6px;',
     });
 
     const headerRow = new St.BoxLayout({
@@ -108,7 +109,8 @@ function cardRow(indicator, card) {
 export function renderCardDetail(indicator, card) {
     const available = card.available !== false;
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });

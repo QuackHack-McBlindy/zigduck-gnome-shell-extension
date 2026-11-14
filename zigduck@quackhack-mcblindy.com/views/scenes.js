@@ -45,7 +45,8 @@ export function renderSceneBtn(indicator, name) {
 export function renderSceneDraft(indicator) {
     const draft = indicator._sceneDraft || '';
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });

@@ -20,7 +20,8 @@ export function renderSyncSection(indicator) {
     const liveHdmi      = indicator._syncStatus?.hdmiSource || null;
 
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true,
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true,
         style: 'spacing: 6px; padding: 8px 10px; margin-bottom: 8px; '
              + 'border-radius: 6px; '
              + 'background-color: rgba(139, 92, 246, 0.10); '

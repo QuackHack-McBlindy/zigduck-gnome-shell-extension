@@ -1,4 +1,5 @@
 import St      from 'gi://St';
+import Clutter from 'gi://Clutter';
 import GLib    from 'gi://GLib';
 import Pango   from 'gi://Pango';
 
@@ -6,7 +7,8 @@ import { plainLabel } from '../icons.js';
 
 export function renderChatView(indicator) {
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
@@ -41,7 +43,8 @@ export function renderChatView(indicator) {
     scroll.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
 
     const list = new St.BoxLayout({
-        vertical: true, x_expand: true,
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true,
         style: 'spacing: 6px; padding: 4px 2px;',
     });
     for (const m of indicator._chatMessages) {
@@ -67,7 +70,8 @@ function chatBubble(role, text, meta = {}) {
     const isUser = role === 'user';
 
     const col = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 2px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 2px;',
     });
 
     if (!isUser && (meta.command || Number.isFinite(meta.ms))) {
@@ -96,7 +100,7 @@ function chatBubble(role, text, meta = {}) {
     if (isUser) row.add_child(new St.Widget({ x_expand: true }));
 
     const bubbleBox = new St.BoxLayout({
-        vertical: true,
+        orientation: Clutter.Orientation.VERTICAL,
         style: 'padding: 8px 12px; '
              + 'border-radius: 14px; '
              + 'max-width: 260px; '

@@ -13,7 +13,8 @@ import { togglePill, tvCollapsibleHeader } from '../widgets.js';
 
 export function renderTvGuideView(indicator) {
     const outer = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 6px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 6px; padding: 4px 0;',
     });
 
     const navRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
@@ -84,7 +85,8 @@ export function renderTvGuideView(indicator) {
     }
 
     const listBox = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 6px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 6px;',
     });
 
     const now = new Date();
@@ -115,7 +117,8 @@ export function renderTvGuideView(indicator) {
 
 function tvChannelCard(ch, now, icons) {
     const card = new St.BoxLayout({
-        vertical: true, x_expand: true,
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true,
         style: 'spacing: 4px; padding: 8px 10px; border-radius: 6px; '
              + 'background-color: rgba(255,255,255,0.04); '
              + 'border: 1px solid rgba(255,255,255,0.08);',
@@ -191,7 +194,8 @@ function tvProgramRow(p, isCurrent) {
 export function renderTvDetail(indicator, tv) {
     const st = indicator._tvGetState(tv.tvKey);
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
@@ -343,7 +347,8 @@ export function renderTvDetail(indicator, tv) {
                 'opacity: 0.6; padding: 8px; font-size: 0.9em;'));
         } else {
             const grid = new St.BoxLayout({
-                vertical: true, x_expand: true, style: 'spacing: 6px;',
+                orientation: Clutter.Orientation.VERTICAL,
+                x_expand: true, style: 'spacing: 6px;',
             });
             for (let i = 0; i < chanEntries.length; i += 6) {
                 const row = new St.BoxLayout({ x_expand: true, style: 'spacing: 6px;' });
@@ -420,7 +425,8 @@ export function renderTvDetail(indicator, tv) {
 
 function tvRemotePanel(indicator, tv) {
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px;',
     });
 
     const send = (typ) => indicator._tvSend(tv, typ);
@@ -463,7 +469,8 @@ function tvRemotePanel(indicator, tv) {
     const mainRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
 
     const volCol = new St.BoxLayout({
-        vertical: true, style: 'spacing: 4px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        style: 'spacing: 4px;',
     });
     volCol.add_child(mkBtn('+', 'up'));
     volCol.add_child(mkBtn('−', 'down'));
@@ -472,7 +479,8 @@ function tvRemotePanel(indicator, tv) {
     mainRow.add_child(new St.Widget({ x_expand: true }));
 
     const dpad = new St.BoxLayout({
-        vertical: true, style: 'spacing: 4px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        style: 'spacing: 4px;',
     });
     const dpadA = new St.BoxLayout({ style: 'spacing: 4px;' });
     dpadA.add_child(new St.Widget({ x_expand: true }));
@@ -497,7 +505,8 @@ function tvRemotePanel(indicator, tv) {
     mainRow.add_child(new St.Widget({ x_expand: true }));
 
     const chanCol = new St.BoxLayout({
-        vertical: true, style: 'spacing: 4px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        style: 'spacing: 4px;',
     });
     chanCol.add_child(mkBtn('↑', 'channel_up'));
     chanCol.add_child(mkBtn('↓', 'channel_down'));
