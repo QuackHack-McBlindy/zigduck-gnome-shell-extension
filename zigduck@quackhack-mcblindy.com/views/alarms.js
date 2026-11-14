@@ -7,7 +7,8 @@ import { sectionHeader, togglePill } from '../widgets.js';
 
 export function renderAlarmsView(indicator) {
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
@@ -35,7 +36,8 @@ export function renderAlarmsView(indicator) {
 
 function alarmsSection(indicator) {
     const sec = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 4px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 4px;',
     });
     sec.add_child(sectionHeader('ALARMS', () => {
         indicator._status.set_text('⏰ add alarm: not implemented');
@@ -87,7 +89,8 @@ function alarmsSection(indicator) {
 
 function timersSection(indicator) {
     const sec = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 4px; padding-top: 6px;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 4px; padding-top: 6px;',
     });
     sec.add_child(sectionHeader('TIMERS', () => {
         indicator._status.set_text('⏱ add timer: not implemented');

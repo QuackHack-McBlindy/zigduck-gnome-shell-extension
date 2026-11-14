@@ -49,8 +49,6 @@ Lights, dimmers, motion sensors - it should all work as expected **out of the bo
 
 ## **Installation**
 
-https://extensions.gnome.org/extension/11365/zigduck-smart-home/
-
 
 ```bash
 git clone https://github.com/QuackHack-McBlindy/zigduck-gnome-shell-extension.git

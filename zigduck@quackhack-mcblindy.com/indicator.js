@@ -102,14 +102,15 @@ class ZigduckIndicator extends PanelMenu.Button {
         this._sliderDebounce = 0;
         this._detailDebounce = 0;
         this._tvVolDebounce   = 0;
-        
+
         this._scrollResetId  = 0;
-        this._lastRenderMode = null; 
+        this._lastRenderMode = null;
         this._tvView         = false;
         this._tvData         = null;
         this._tvIcons        = null;
         this._tvIconsLoaded  = false;
         this._tvState        = {};
+        this._tvSyncedFromState = {};
         this._cards        = [];
         this._detailCard   = null;
         this._sceneDraft   = null;
@@ -124,7 +125,8 @@ class ZigduckIndicator extends PanelMenu.Button {
 
         const root = new PopupMenu.PopupBaseMenuItem({ reactive: false, can_focus: false });
         const content = new St.BoxLayout({
-            vertical: true, x_expand: true,
+            orientation: Clutter.Orientation.VERTICAL,
+            x_expand: true,
             style: 'min-width: 400px; max-width: 400px; spacing: 8px; padding: 6px;',
         });
         root.add_child(content);
@@ -210,7 +212,8 @@ class ZigduckIndicator extends PanelMenu.Button {
         }));
 
         this._contentBox = new St.BoxLayout({
-            vertical: true, x_expand: true, style: 'spacing: 4px;',
+            orientation: Clutter.Orientation.VERTICAL,
+            x_expand: true, style: 'spacing: 4px;',
         });
         this._contentScroll = new St.ScrollView({
             x_expand: true,
@@ -563,21 +566,21 @@ class ZigduckIndicator extends PanelMenu.Button {
         });
     }
 
-    
+
     async _refreshDeviceState(device) {
         if (!device.ip || !device.stateEndpoint) return;
-    
+
         try {
             const body = await this._httpGet(`http://${device.ip}${device.stateEndpoint}`);
             const parsed = JSON.parse(body);
             if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return;
-    
+
             const updates = {};
             for (const [k, v] of Object.entries(parsed)) {
                 if (v === null || v === undefined) continue;
                 updates[k] = (typeof v === 'object') ? JSON.stringify(v) : String(v);
             }
-    
+
             if (Object.keys(updates).length) {
                 this._states[device.friendly_name] = {
                     ...(this._states[device.friendly_name] || {}),
@@ -587,29 +590,29 @@ class ZigduckIndicator extends PanelMenu.Button {
             }
         } catch (_) {}
     }
-    
+
     async _setControl(device, key, ctl, value) {
         if (ctl.type === 'sensor') return;
         if (value === null || value === undefined) {
             this._status.set_text(`✗ ${key} needs a value`);
             return;
         }
-    
+
         const topic   = `${this._baseTopic}/${device.friendly_name}/set`;
         const payload = JSON.stringify({ [key]: value });
-    
+
         this._states[device.friendly_name] = {
             ...(this._states[device.friendly_name] || {}),
             [key]: String(value),
         };
         this._renderContent();
         this._updateRoomSelection();
-    
+
         this._status.set_text(`… ${device.friendly_name} ${key}`);
         try {
             await runCli(['--publish', '--topic', topic, '--payload', payload], 8);
             this._status.set_text('● done');
-    
+
             if (device.stateEndpoint) {
                 GLib.timeout_add(GLib.PRIORITY_DEFAULT, 600, () => {
                     if (this._alive) this._refreshDeviceState(device);
@@ -618,7 +621,7 @@ class ZigduckIndicator extends PanelMenu.Button {
             }
         } catch (e) { this._status.set_text('✗ ' + (e.message || '').slice(0, 60)); }
     }
-    
+
     async _refresh() {
         if (!this._alive) return;
         this._status.set_text('…');
@@ -639,6 +642,18 @@ class ZigduckIndicator extends PanelMenu.Button {
             ];
 
             this._states  = states;
+
+            for (const d of this._devices) {
+                if (d.type !== 'tv') continue;
+                const cached = this._tvGetState(d.tvKey);
+                const fresh = this._states[d.friendly_name]?.state;
+                if (fresh !== 'ON' && fresh !== 'OFF') continue;
+                const prevSynced = this._tvSyncedFromState[d.friendly_name];
+                if (prevSynced === fresh) continue;
+                cached.power = (fresh === 'ON');
+                this._tvSyncedFromState[d.friendly_name] = fresh;
+            }
+
             this._notifications = Array.isArray(notifArr) ? notifArr : [];
             this._updateBellBadge(this._notifications.length);
 
@@ -986,7 +1001,10 @@ class ZigduckIndicator extends PanelMenu.Button {
             return;
         }
 
-        const grid = new St.BoxLayout({ vertical: true, x_expand: true, style: 'spacing: 6px;' });
+        const grid = new St.BoxLayout({
+            orientation: Clutter.Orientation.VERTICAL,
+            x_expand: true, style: 'spacing: 6px;',
+        });
         for (let i = 0; i < this._scenes.length; i += 2) {
             const row = new St.BoxLayout({ x_expand: true, style: 'spacing: 6px;' });
             row.add_child(this._sceneBtn(this._scenes[i]));
@@ -1362,7 +1380,7 @@ class ZigduckIndicator extends PanelMenu.Button {
             GLib.source_remove(this._detailDebounce);
             this._detailDebounce = 0;
         }
-        if (this._tvVolDebounce) {          // ← add this
+        if (this._tvVolDebounce) {
             GLib.source_remove(this._tvVolDebounce);
             this._tvVolDebounce = 0;
         }

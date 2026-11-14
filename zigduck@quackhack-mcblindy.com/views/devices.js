@@ -66,7 +66,7 @@ function renderControl(indicator, device, key, ctl, currentValue) {
 
     const hasValues = Array.isArray(ctl.values) && ctl.values.length > 0;
 
-    
+
     if (ctl.type === 'bool') {
         const hasValueList = Array.isArray(ctl.values) && ctl.values.length === 2;
         const isOn = hasValueList
@@ -74,7 +74,7 @@ function renderControl(indicator, device, key, ctl, currentValue) {
             : isTruthy(currentValue);
         const onPayload  = hasValueList ? String(ctl.values[0]) : true;
         const offPayload = hasValueList ? String(ctl.values[1]) : false;
-    
+
         const pill = togglePill(
             isOn,
             isOn ? 'On' : 'Off',
@@ -246,7 +246,8 @@ export function renderDeviceDetail(indicator, d) {
     const isHouseDevice = String(d.id || '').startsWith('house:');
 
     const wrap = new St.BoxLayout({
-        vertical: true, x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
+        orientation: Clutter.Orientation.VERTICAL,
+        x_expand: true, style: 'spacing: 8px; padding: 4px 0;',
     });
 
     const backRow = new St.BoxLayout({ x_expand: true, style: 'spacing: 8px;' });
