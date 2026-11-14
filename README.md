@@ -60,6 +60,33 @@ bash install.sh
 
 <br>
 
+<details><summary><strong>
+❄️ Installing Using Flakes (NixOS)
+</strong></summary>
+
+
+#### **Add zigduck-gnome-shell-extension as an input in your flake:**
+
+```nix
+  inputs = {
+    nixpkgs.url   = "github:NixOS/nixpkgs/nixos-unstable";
+    zigduck-gnome-shell-extension.url = "github:quackhack-mcblindy/zigduck-gnome-shell-extension";
+  };
+```
+
+<br>
+The flake provides the extension as a package.<br>
+
+```nix
+{
+  environment.systemPackages = [ inputs.zigduck-gnome-shell-extension.packages.${pkgs.system}.default ];
+}
+```
+
+</details>
+
+<br>
+
 
 ## **License**
 
