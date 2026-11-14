@@ -11,12 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+### Fixed
+
+### Removed
+
+
+## [0.1.2] - 2026-11-14
+
+### Added
+
+### Changed
+
 - Bump Gnome Shell to version 51.
 
 ### Fixed
 
 ### Removed
-
 
 ## [0.1.1] - 2026-10-22
 
